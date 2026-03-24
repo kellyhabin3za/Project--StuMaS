@@ -1,3 +1,5 @@
+
+
 let students = [];
 
 const bodyDiv = document.querySelector("#bodyDiv");
@@ -27,7 +29,7 @@ const renderTable = () => {
     const TableBox = document.createElement('div');
     TableBox.classList.add('rendered-table-container');
 
-    TableBox.appendChild(title)
+    TableBox.appendChild(title);
 
     table.innerHTML = `
     <tr>
@@ -40,9 +42,13 @@ const renderTable = () => {
     </tr> 
     `;
 
-    students.forEach(student => {
+    students.forEach((student, index) => {
 
         const row = document.createElement('tr');
+        row.classList.add('zoomHover');
+        row.setAttribute('data-index', index);
+
+
 
         row.innerHTML = `
 
@@ -52,12 +58,58 @@ const renderTable = () => {
         <td class="table-rows">${student.science}</td>
         <td class="table-rows">${student.english}</td>
         <td class="table-rows">${student.average}</td>
-        
+        <td class="actions-cell"></td>
         `;
         table.append(row);
 
         
     });
+
+      table.addEventListener('mouseenter', event => {
+    const row = event.target.closest('tr');
+
+    if (row && row.classList.contains('zoomHover') && event.target.tagName === 'TR') {
+        event.target.style.background = "azure";
+        event.target.style.height = "50px";
+
+
+
+            const actionsCell = event.target.querySelector('.actions-cell');
+
+
+            const editBtn = document.createElement('button');
+                    editBtn.setAttribute('id', 'editRow');
+                    editBtn.innerText = 'Edit';
+            const deleteBtn = document.createElement('button');
+                    deleteBtn.setAttribute('id', 'deleteRow');
+                    deleteBtn.innerText = 'Delete';
+                    actionsCell.appendChild(editBtn);
+                    actionsCell.appendChild(deleteBtn);
+            
+        setTimeout(() => {
+    editBtn.style.opacity = '1';
+    deleteBtn.style.opacity = '1';
+}, 10);
+        
+            deleteBtn.addEventListener('click', () => {
+                const index = event.target.getAttribute('data-index');
+                students.splice(index, 1);
+                localStorage.setItem("students", JSON.stringify(students));
+                renderTable();
+});
+
+    }
+}, true);
+
+table.addEventListener('mouseleave', event => {
+    if (event.target.tagName === 'TR' && event.target.classList.contains('zoomHover')) {
+        event.target.style.background = "";
+        event.target.style.height = "";
+    }
+    const actionsCell = event.target.querySelector('.actions-cell');
+    if (actionsCell) actionsCell.innerHTML = "";
+}, true);
+    
 
         TableBox.appendChild(table)
         tableContainer.appendChild(TableBox);
@@ -169,4 +221,3 @@ const createForm = ()=>{
 myAddBtn.addEventListener('click', event =>{
     createForm();
 });
-

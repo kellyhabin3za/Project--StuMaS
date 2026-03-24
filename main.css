@@ -157,9 +157,10 @@ h1, button, a, div, .head-title, i, input, label, form, .table-class, table, tr,
 .table-headers{
     background: #c2bfbf;
     padding: .8rem;
-    width: 14vw;
+    width: 10vw;
     border-bottom: solid 2px rgb(0, 0, 0);
     margin-top: 3%;
+    text-align: center;
 }
 .table-rows{
         padding: .3rem;
@@ -169,4 +170,41 @@ h1, button, a, div, .head-title, i, input, label, form, .table-class, table, tr,
 font-family: "Lexend", sans-serif;
   font-optical-sizing: auto;
   font-size: 3rem;
+}
+.zoomHover{
+    /* filter: blur(3px);
+    height: 3rem; */
+
+}
+.row-buttons{
+    display: flex;
+}
+.zoomHover {
+    transition: background 0.3s ease, height 0.3s ease;
+}
+#editRow{
+    padding: .4rem;
+    width: 3.5rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    background: rgb(5, 158, 0);
+    color: azure;
+    font-weight: bold;
+    border-radius: .3rem;
+    border: none;
+}
+#deleteRow{
+    padding: .4rem;
+    width: 4.5rem;
+    margin-right: 2rem;
+    border: none;
+    background: rgb(255, 55, 55);
+    color: azure;
+    font-weight: bold;
+    border-radius: .3rem;
+    transition: height 1s ease;
+}
+#editBtn, #deleteBtn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
