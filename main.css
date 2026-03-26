@@ -210,3 +210,35 @@ transition: all 1s ease, height 0.3s ease-in;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+.edit-input {
+    border: 0.5px solid #888;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    width: 80%;
+    background: transparent;
+    color: inherit;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.edit-input:focus {
+    border-color: #4CAF50;
+    border-width: 1.5px;
+}
+
+.saveBtn {
+    background: transparent;
+    border: 0.5px solid #4CAF50;
+    color: #4CAF50;
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.saveBtn:hover {
+    background: #4CAF50;
+    color: white;
+}+

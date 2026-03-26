@@ -96,6 +96,39 @@ const renderTable = () => {
                 students.splice(index, 1);
                 localStorage.setItem("students", JSON.stringify(students));
                 renderTable();
+            
+});
+
+            editBtn.addEventListener('click', () => {
+    const index = event.target.getAttribute('data-index');
+    const student = students[index];
+
+    row.innerHTML = `
+        <td><input class="edit-input" value="${student.names}"></td>
+        <td><input class="edit-input" type="number" value="${student.age}"></td>
+        <td><input class="edit-input" type="number" value="${student.maths}"></td>
+        <td><input class="edit-input" type="number" value="${student.science}"></td>
+        <td><input class="edit-input" type="number" value="${student.english}"></td>
+        <td></td>
+        <td><button class="saveBtn">Save</button></td>
+    `;
+
+    // Wire up save button
+    row.querySelector('.saveBtn').addEventListener('click', () => {
+        const inputs = row.querySelectorAll('.edit-input');
+        
+        students[index] = {
+            names: inputs[0].value,
+            age: Number(inputs[1].value),
+            maths: Number(inputs[2].value),
+            science: Number(inputs[3].value),
+            english: Number(inputs[4].value),
+            average: Math.round((Number(inputs[2].value) + Number(inputs[3].value) + Number(inputs[4].value)) / 3)
+        };
+
+        localStorage.setItem("students", JSON.stringify(students));
+        renderTable();
+    });
 });
 
     }
